@@ -4,7 +4,7 @@ fb_comments: 3
 title: About
 ---
 
-<img src="portrait.jpg" width="50%" align="right">
+<img src="{{site.url}}/cody/portrait.jpg" width="50%" align="right">
 
 Hello. My name is Cody....
 
