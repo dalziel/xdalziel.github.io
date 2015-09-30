@@ -3,7 +3,7 @@ layout: page
 title: About
 ---
 
-<img src="{{site.baseurl}}/cody/portrait.jpg" width="50%" align="right">
+<img src="{{site.url}}/cody/portrait.jpg" width="50%" align="right">
 
 Hello. My name is Cody....
 
