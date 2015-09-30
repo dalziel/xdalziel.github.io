@@ -3,7 +3,14 @@ layout: page
 title: About
 ---
 
-<img src="{{site.url}}/cody/portrait.jpg" width="50%" align="right">
+
+
+<img src="https://raw.githubusercontent.com/dalziel/dalziel.github.io/master/cody/portrait.JPG" width="50%" align="right">
+<!---
+<div style="text-align:center" markdown="1">
+	![]({{ site.url }}/cody/portrait.jpg "Cody")
+</div>
+-->
 
 Hello. My name is Cody....
 
