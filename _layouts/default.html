@@ -1,60 +1,75 @@
-<!DOCTYPE HTML>
-<html lang="en" prefix="og: http://ogp.me/ns#">
-  <head>
-    <meta charset="utf-8">
-    <title>{% if page.title %}{{ page.title }} &mdash; {% endif %}PAGE TITLE</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    {% if page.title != "Archive (sidebar)" %}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% endif %}
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" media="screen, projection" href="/res/screen.css" type="text/css">
-    <link rel="stylesheet" media="print" href="/res/print.css" type="text/css">
-    <link rel="shortcut icon" href="/newfavicon.ico">
-    
-    {% if page.ios_app_name %}
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    {% endif %}
-    
-    <script>window.initFuncs = [];</script>
-  </head>
-  <body{% if page.wide_layout %} class="wide"{% endif %}>
-    <header>
-      <h1 class="logo" onclick="document.location.href='/';"><a href="/"><img src="/res/cody.png" width="160" height="50" alt="Signature"></a></h1>
-      <ul class="navigation">
-        <li><a href="/julian/"{% if page.url contains "/julian/" %}class="active"{% endif %} title="Julian">JULIAN</a></li>
-        <li><a href="/natasha/"{% if page.url contains "/natasha/" %}class="active"{% endif %} title="Natasha">NATASHA</a></li>
-        <li><a href="/nigel/"{% if page.url contains "/nigel/" %}class="active"{% endif %} title="Nigel">NIGEL</a></li>
-        <li><a href="/cody/"{% if page.url contains "/cody/" %}class="active"{% endif %}>CODY</a></li>
-      </ul>
-    </header>
-  
-      {{ content }}
-    
-    {% if paginator.page %}
-    <div id="paginator" class="content">
-      {% if paginator.next_page %}
-      <a href="/page{{ paginator.next_page }}/">Older entries</a>
+---
+layout: typo
+---
+<!doctype html>
+<html lang="{{ page.lang }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=0.85">
+  <meta name="description" content="{% if page.desc %}{{ page.desc | strip_html }}{% else %}{{ page.excerpt | strip_html | replace: "[[", " ("  | replace: "]]", ")" | strip_newlines }}{% endif %}">
+  <title>{{page.title | strip_html}}</title>
+  <link rel="icon" href="/medias/elements/favicon.ico" />
+  <link rel="alternate" href="/rss.xml" type="application/rss+xml" />
+  <link rel="stylesheet" href="/style.css">{% capture hide %}
+    {% assign posts=site.posts | where:"date", page.date %}
+    {% for post in posts %}
+      {% if post.lang != page.lang %}
+        {% assign url = post.url %}
+        {% assign lang = post.lang %}
       {% endif %}
-      {% if paginator.previous_page %}
-      <a href="/page{{ paginator.previous_page }}/">Newer entries</a>
-      {% endif %}
-    </div>
-    {% endif %}
+    {% endfor %}
+  {% endcapture %}{% if url %}
+  <link rel="alternate" hreflang="{{ lang }}" href="{{ url }}" />{% endif %}
+</head>
+
+<body class="{{ page.lang }}{% if page.type == 'pages' %} page{% endif %}">
+
+ 
+<div id="wrap"></div>
+
+<div>
+  <ul id="mainmenu">
+    {% for menu in site.data.navigation %}
     
-    {% unless page.no_footer %}
-    <footer>
-      <p>
-        This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons License</a>
-      </p>
-    </footer>
-    {% endunless %}
+      {% if page.url == menu.url %}
+        <li class="active"><a href="{{site.url}}{{ menu.url }}">{{ menu.title }}</a>
+          {% if menu.sub != null %}
+            <ul>
+              {% for s in menu.sub %}
+                <li><a href="{{site.url}}{{s.suburl}}">{{s.subtitle}}</a></li>    
+              {% endfor %} 
+            </ul>
+          {% endif %}  
+        </li> 
+      {% else %}     
+        <li><a href="{{site.url}}{{ menu.url }}">{{ menu.title }}</a>
+          {% if menu.sub != null %}
+            <ul>
+              {% for s in menu.sub %}
+                <li><a href="{{site.url}}{{s.suburl}}">{{s.subtitle}}</a></li>    
+              {% endfor %} 
+            </ul>
+          {% endif %} 
+        </li>
+      {% endif %}    
     
-    {% include highlight.html %}
-    {% include analytics.html %}
-    <script>for (var k in window.initFuncs) { window.initFuncs[k](); } delete window.initFuncs;</script>
-  </body>
+    {% endfor %}
+  </ul>
+</div>
+
+
+<div class="article">
+{% if page.type != 'pages' %}
+<p class="date">{% include date.html date=page.date %}</p>
+{% endif %}
+{{ content }}
+<hr/>
+</div>
+
+</body>
 </html>
+
+{% include autoreload-in-debug.html %}
+
+

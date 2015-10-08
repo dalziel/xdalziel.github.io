@@ -1,12 +1,54 @@
-port: 3000
-lsi: false
+#port: 3000
+#lsi: false
 #permalink: /:year/:month/:day/:title.html
-permalink: /:categories/:title.html
+#permalink: /:categories/:title.html
 # paginate: 50
-markdown: rdiscount
+#markdown: rdiscount
 # enables SmartyPants (nice curly quotation marks, em/en dashes, elipses, etc):
-rdiscount:
-  extensions: [smart]
+#rdiscount:
+#  extensions: [smart]
 # Since GH pages override this to "true", we test this value to see if we are running locally
-safe: false
-url: https://dalziel.github.io
+#safe: false
+
+permalink: /:title/
+
+markdown: redcarpet
+redcarpet:
+  extensions: ['smart', 'superscript']
+
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      lang: en
+      layout: default
+  -
+    scope:
+      path: _posts/fr
+    values:
+      lang: fr
+  -
+    scope:
+      path: _posts/fr/pages
+    values:
+      type: pages
+      desc: "Site personnel traitant essentiellement de programmation en Python, Ruby, TeX, R..."
+  -
+    scope:
+      path: _posts/en/pages
+    values:
+      type: pages
+      desc: "Personnal website mostly about programming in Python, Ruby, TeX, R..."
+
+  -
+    scope:
+      path: _posts/fr/projects
+    values:
+      type: projects
+  -
+    scope:
+      path: _posts/en/projects
+    values:
+      type: projects

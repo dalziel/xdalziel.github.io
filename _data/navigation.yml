@@ -1,0 +1,32 @@
+- title: julian
+  url:   "/julian/"
+  sub:
+    - subtitle: "school"
+      suburl: "/julian/school/"
+    - subtitle: "music"
+      suburl: "/julian/music/"
+    - subtitle: "soccer"
+      suburl: "/julian/soccer/"
+- title: "natasha"
+  url:   "/natasha/"
+  sub:
+    - subtitle: "school"
+      suburl: "/julian/school/"
+    - subtitle: "music"
+      suburl: "/julian/music/"
+    - subtitle: "soccer"
+      suburl: "/julian/soccer/"
+- title: "nigel"
+  url:   "/nigel/"
+  sub:
+    - subtitle: "recipes"
+      suburl: "/nigel/recipes/"
+    - subtitle: "other"
+      suburl: "/nigel/other/"
+- title: "cody"
+  url:   "/cody/"
+  sub:
+    - subtitle: "food"
+      suburl: "/nigel/recipes/"
+    - subtitle: "walks"
+      suburl: "/nigel/other/"
